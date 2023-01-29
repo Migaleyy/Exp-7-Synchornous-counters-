@@ -46,26 +46,57 @@ This type of counter is normally referred to as a Down Counter, (CTD). In a bina
 
 4-bit Count Down Counter
 ### Procedure
-/* write all the steps invloved */
 
+Step 1: To design a synchronous up counter, first we need to know what number of flip flops are required. we can find out by considering a number of bits mentioned in the question. So, in this, we required to make 4 bit counter so the number of flip flops required is 4 [2" where n is a number of bits].
 
+Step 2: After that, we need to construct a state table with excitation table. Note: To construct excitation table from state table you should know the excitation table of respective flip flop, in this case, it is T flip flop.
+
+Down counter:
+
+Normally the counter increments the 4 bit word (Q4,Q3,Q2,Q1) by one every time the clock input is toggled. If the UP/DOWN input is asserted the counter counts down (subtracts one) upon each clock cycle instead.
 
 ### PROGRAM 
+```
 /*
 Program for flipflops  and verify its truth table in quartus using Verilog programming.
-Developed by: 
-RegisterNumber:  
+Developed by: 22006541
+RegisterNumber: Migal G Arunadann
 */
 
-
-
+# UP COUNTER
+module UC(input clk,input reset,output[0:3]counter);
+reg[0:3] counter_up;
+always@ (posedge clk or posedge reset)
+begin
+if(reset)
+counter_up <= 4'd0;
+else
+counter_up <= counter_up + 4'd1;
+end
+assign counter = counter_up;
+endmodule
+ 
+# DOWN COUNTER
+module dc(input clk,input reset,output[0:3]counter);
+reg[0:3] counter_down;
+always@ (posedge clk or posedge reset)
+begin
+if(reset)
+counter_down <= 4'd0;
+else
+counter_down <= counter_down - 4'd1;
+end
+assign counter = counter_down;
+endmodule
 
 
 
 ### RTL LOGIC UP COUNTER AND DOWN COUNTER  
 
+![upcounter](https://user-images.githubusercontent.com/118262199/215339046-40b1923b-08d8-44bd-bcd0-33c6b17decca.png)
 
 
+![downcounter](https://user-images.githubusercontent.com/118262199/215339060-94ebc437-e293-4fda-ae0a-8fe64c90d784.png)
 
 
 
@@ -74,15 +105,21 @@ RegisterNumber:
 
 ### TIMING DIGRAMS FOR COUNTER  
 
+![upc](https://user-images.githubusercontent.com/118262199/215339110-6753ecde-811c-4599-9e6f-5cfb151ddc44.png)
 
+![downcounterwaveform](https://user-images.githubusercontent.com/118262199/215339130-0e037dbf-b78c-49b1-b937-fcd5f183f29a.png)
 
 
 
 ### TRUTH TABLE 
 
+![uptt](https://user-images.githubusercontent.com/118262199/215339151-f9360d76-55ac-4556-a018-4c8e1e1d6b3d.png)
 
 
+![dctt](https://user-images.githubusercontent.com/118262199/215339238-1ed1cc10-6daf-4f4b-85e5-8c177f832a51.png)
 
 
 
 ### RESULTS 
+
+Successfully implemented 4 bit up and down counters and validate functionality.
